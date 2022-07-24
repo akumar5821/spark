@@ -1,0 +1,6 @@
+val df = spark.createDataFrame(data).toDF(columns: _*)
+
+    val df1 = df.withColumn("age", col("age")*10)
+
+    val df2 = df.withColumn("Country", lit("India"))
+    df2.show()
