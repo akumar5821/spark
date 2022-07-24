@@ -4,3 +4,15 @@ val df = spark.createDataFrame(data).toDF(columns: _*)
 
     val df2 = df.withColumn("Country", lit("India"))
     df2.show()
+    
+    val df1 = df.withColumn("age", col("age")*10)
+
+    val df2 = df1.withColumn("CopiedColumn", col("salary")* 1)
+
+    df2.createOrReplaceTempView("PERSON")
+    spark.sql("SELECT salary*100 as salary, salary*-1 as CopiedColumn FROM PERSON")
+
+    val df3 =df2.withColumnRenamed("firstname", "FirstName")
+    val df4 = df3.withColumnRenamed("lastname", "LastName")
+
+    val df5 = df4.drop("CopiedColumn").show()
